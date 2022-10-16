@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
+    <!-- Optional theme -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
+      integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ"
+      crossorigin="anonymous"
+    />
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <style>
+      .margin-top-10{
+        margin-top:10px;
+      }
+      .valign-middle{
+        vertical-align: middle;
+      }
+      .valign-bottom{
+        vertical-align: bottom;
+      }
+      .center-content{
+        margin-left: auto;
+        margin-right: auto;
+        width:50%
+      }
+      .border-light{
+        border: 1px black;
+      }
+      .cursor-pointer{
+        cursor:pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div id="calculatorApp">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table table-bordered">
+                  <tr style="height:70px">
+                    <td colspan="4" style="text-align: right; vertical-align: bottom; background-color:cornsilk;"><h3>{{ resultDisplay }}</h3></td>
+                  </tr>
+                  <tr>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="Reset">AC</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="ClearCurrentDisplay">CE</button></td>
+                    <td></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="Delete">DEL</button></td>
+                  </tr>
+                   <tr>
+                    <td></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="ChangeSign">+/-</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('%')">%</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('/')">/</button></td>
+                  </tr>
+                   <tr>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('7')">7</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('8')">8</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('9')">9</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('*')">x</button></td>
+                  </tr>
+                  <tr>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('4')">4</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('5')">5</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('6')">6</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('-')">-</button></td>
+                  </tr>
+                  <tr>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('1')">1</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('2')">2</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('3')">3</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('+')">+</button></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('0')">0</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetResultDisplay('.')">.</button></td>
+                    <td><button type="button" class="btn btn-light btn-block btn-lg" @click="GetTotal">=</button></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+        </div>
+    </div>
+  </body>
+</html>
+
+<script
+  type="text/javascript"
+  src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+></script>
+<script type="module">
+  import { createApp } from "vue";
+
+  createApp({
+    data() {
+      return {
+        resultDisplay: 0,
+        operation:[]
+      };
+    },
+    created() {
+      let _app = this;
+      _app.InitData();
+    },
+    computed:{
+      LastIndexIsNotOperatorAndDot(){
+        let _app = this;
+        let latestRes =  _app.operation[_app.operation.length - 1];
+        if(latestRes != '+' && latestRes != '-' && latestRes != '/' && latestRes != '*' && latestRes != '%' && latestRes !='.'){
+          return true;
+        }else{
+          return false;
+        }
+      }
+    },
+    methods: {
+      InitData() {
+        let _app = this;
+        toastr.info("Welcome!");
+      },
+      Reset(){
+        let _app = this;
+        _app.resultDisplay = 0;
+        _app.operation = [];
+      },
+      Delete(){
+        let _app = this;
+        _app.operation.pop();
+
+        if(_app.operation.length >= 1){
+          _app.resultDisplay = _app.operation.join("");
+        }
+        else {
+          _app.resultDisplay = 0;
+        }
+      },
+      ClearCurrentDisplay(){
+        let _app = this;
+        _app.resultDisplay = 0;
+      },
+      GetResultDisplay(param){
+          let _app = this;
+          if(_app.IsOperatorOrDot(param)){
+            if(_app.operation.length != 0){
+              if(_app.LastIndexIsNotOperatorAndDot){
+                _app.operation.push(param);
+              }
+            }
+          }
+          else{
+            _app.operation.push(param);
+          }
+
+          _app.RemoveInvalidDisplay();
+      },
+      GetTotal(){
+          let _app = this;
+
+          if(_app.LastIndexIsNotOperatorAndDot && _app.operation.length != 0){
+            _app.resultDisplay = eval(_app.operation.join(''));
+            _app.operation = [];
+            _app.operation.push(_app.resultDisplay);
+          }
+      },
+      ChangeSign(){
+          let _app = this;
+
+          if(_app.LastIndexIsNotOperatorAndDot && _app.operation.length != 0){
+              if(_app.operation[0] != 0){
+                if(_app.operation[0].toString().charAt(0)!= '-'){
+                  _app.operation[0] = '-' + _app.operation[0];
+                }
+                else{
+                  _app.operation[0] = _app.operation[0].toString().replace('-', '');
+                }
+              }
+               _app.resultDisplay = _app.operation.join('');
+          }
+      },
+      IsOperatorOrDot(param){
+        if(param == '+' || param == '-' || param == '*' ||param == '/' ||param == '%' || param == '.'){
+          return true;
+        }else{
+          return false;
+        }
+      },
+      RemoveInvalidDisplay(){
+        let _app = this;
+        if(_app.operation[0] == 0){
+            _app.operation.shift();
+            _app.resultDisplay = 0;
+          }
+          else if(_app.operation.length == 0){
+            _app.resultDisplay = 0;
+          }else{
+            _app.resultDisplay = _app.operation.join("");
+          }
+      }
+    },
+  }).mount("#calculatorApp");
+</script>
